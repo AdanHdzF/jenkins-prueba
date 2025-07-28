@@ -1,6 +1,10 @@
 pipeline {
 	agent any
 
+	environment {
+		DOCKER_IMAGE = 'adanhf/echo-test:jenkins'
+	}
+
 	// triggers {
 	// 	pollSCM('H/5 * * * *') // Polls SCM every 5 minutes
 	// }
@@ -18,7 +22,10 @@ pipeline {
 
 		stage('Build') {
 			steps {
-				bat 'docker build -t adanhf/echo-test:jenkins . && docker images adanhf/echo-test'
+				// bat 'docker build -t adanhf/echo-test:jenkins .'
+				script {
+					docker.build(DOCKER_IMAGE)
+				}
 			}
 		}
 	}
