@@ -3,7 +3,6 @@ pipeline {
 
 	environment {
 		DOCKER_IMAGE = 'adanhf/echo-test:jenkins'
-		TEST = 'test'
 	}
 
 	// triggers {
