@@ -24,7 +24,7 @@ pipeline {
 			steps {
 				// bat 'docker build -t adanhf/echo-test:jenkins .'
 				script {
-					docker.build(DOCKER_IMAGE)
+					docker.build(env.DOCKER_IMAGE)
 				}
 			}
 		}
