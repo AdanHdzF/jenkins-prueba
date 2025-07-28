@@ -2,7 +2,8 @@ pipeline {
 	agent any
 
 	environment {
-		DOCKER_IMAGE = 'adanhf/echo-test:jenkins'
+		DOCKER_IMAGE = 'adanhf/echo-test'
+		DOCKER_IMAGE_TAG = 'jenkins-pipeline'
 	}
 
 	// triggers {
@@ -24,7 +25,7 @@ pipeline {
 			steps {
 				// bat 'docker build -t adanhf/echo-test:jenkins .'
 				script {
-					dockerImage = docker.build(DOCKER_IMAGE)
+					dockerImage = docker.build(DOCKER_IMAGE + ':' + DOCKER_IMAGE_TAG)
 				}
 			}
 		}
@@ -33,7 +34,7 @@ pipeline {
 			steps {
 				script {
 					docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
-						dockerImage.push('latest')
+						dockerImage.push(DOCKER_IMAGE_TAG)
 					}
 				}
 			}
