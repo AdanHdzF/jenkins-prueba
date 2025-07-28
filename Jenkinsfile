@@ -24,7 +24,17 @@ pipeline {
 			steps {
 				// bat 'docker build -t adanhf/echo-test:jenkins .'
 				script {
-					docker.build(env.DOCKER_IMAGE)
+					dockerImage = docker.build(DOCKER_IMAGE)
+				}
+			}
+		}
+
+		stage('Push') {
+			steps {
+				script {
+					docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+						dockerImage.push('latest')
+					}
 				}
 			}
 		}
