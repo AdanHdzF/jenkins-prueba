@@ -40,10 +40,10 @@ pipeline {
 			}
 			post {
 				success {
-					bat 'echo "Docker image pushed successfull."'
+					echo "Docker image pushed successfully: ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
 				}
 				failure {
-					bat 'echo "Failed to push Docker image."'
+					echo "Failed to push Docker image: ${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
 				}
 			}
 		}
