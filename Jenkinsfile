@@ -18,7 +18,7 @@ pipeline {
 
 		stage('Build') {
 			steps {
-				bat 'echo "Building the project..."'
+				bat 'docker build -t adanhf/echo-test:jenkins . && docker images adanhf/echo-test'
 			}
 		}
 	}
