@@ -3,7 +3,7 @@ pipeline {
 
 	environment {
 		DOCKER_IMAGE = 'adanhf/echo-test'
-		DOCKER_IMAGE_TAG = 'jenkins-pipeline'
+		DOCKER_IMAGE_TAG = 'jenkins'
 	}
 
 	// triggers {
@@ -33,7 +33,7 @@ pipeline {
 		stage('Push') {
 			steps {
 				script {
-					docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+					docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credential') {
 						dockerImage.push(DOCKER_IMAGE_TAG)
 					}
 				}
