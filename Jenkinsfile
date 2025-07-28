@@ -33,9 +33,17 @@ pipeline {
 		stage('Push') {
 			steps {
 				script {
-					docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials') {
+					docker.withRegistry('https://index.docker.io/v1/', 'docker-hub-credentials-not-exists') {
 						dockerImage.push(DOCKER_IMAGE_TAG)
 					}
+				}
+			}
+			post {
+				success {
+					bat 'echo "Docker image pushed successfull."'
+				}
+				failure {
+					bat 'echo "Failed to push Docker image."'
 				}
 			}
 		}
