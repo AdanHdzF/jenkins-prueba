@@ -52,9 +52,26 @@ pipeline {
 							subject: "Failed to push Docker image: ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_TAG}. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER}",
 							body: "There was an error pushing the Docker image. Please check the Jenkins job for more details. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} URL: ${env.BUILD_URL} \n\n ${log}"
 					}
-					
 				}
 			}
+		}
+	}
+
+	post {
+		success {
+			echo "Pipeline completed successfully."
+			script {
+						mail to: 'adan.hdz.f@gmail.com',
+							from: 'adan.hdz.f@gmail.com',
+							subject: "Pipeline completed successfully. ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_TAG}. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER}",
+							body: "Pipeline completed successfully. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} URL: ${env.BUILD_URL}"
+					}
+		}
+		failure {
+			echo "Pipeline failed."
+		}
+		always {
+			echo "This will always run, regardless of the pipeline result."
 		}
 	}
 	
