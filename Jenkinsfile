@@ -59,19 +59,20 @@ pipeline {
 
 	post {
 		success {
-			echo "Pipeline completed successfully."
 			script {
-						mail to: 'adan.hdz.f@gmail.com',
-							from: 'adan.hdz.f@gmail.com',
-							subject: "Pipeline completed successfully. ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_TAG}. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER}",
-							body: "Pipeline completed successfully. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} URL: ${env.BUILD_URL}"
-					}
+				mail to: 'adan.hdz.f@gmail.com',
+					from: 'adan.hdz.f@gmail.com',
+					subject: "Pipeline completed successfully. ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_TAG}. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER}",
+					body: "Pipeline completed successfully. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} URL: ${env.BUILD_URL}"
+			}
 		}
 		failure {
-			echo "Pipeline failed."
-		}
-		always {
-			echo "This will always run, regardless of the pipeline result."
+			script {
+				mail to: 'adan.hdz.f@gmail.com',
+					from: 'adan.hdz.f@gmail.com',
+					subject: "Pipeline failed. ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_TAG}. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER}",
+					body: "Pipeline failed. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} URL: ${env.BUILD_URL}"
+			}
 		}
 	}
 	
