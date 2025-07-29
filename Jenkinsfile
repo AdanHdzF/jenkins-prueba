@@ -47,7 +47,7 @@ pipeline {
 					mail to: 'adan.hdz.f@gmail.com',
 					     from: 'adan.hdz.f@gmail.com',
 					     subject: "Failed to push Docker image: ${env.DOCKER_IMAGE}:${env.DOCKER_IMAGE_TAG}. Job: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER}",
-					     body: "There was an error pushing the Docker image. Please check the Jenkins job for more details. ob: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} ${env.BUILD_URL}"
+					     body: "There was an error pushing the Docker image. Please check the Jenkins job for more details. ob: ${env.JOB_NAME} Build: ${env.BUILD_NUMBER} URL: ${env.BUILD_URL}"
 				}
 			}
 		}
